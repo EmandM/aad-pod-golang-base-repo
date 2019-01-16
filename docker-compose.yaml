@@ -1,0 +1,8 @@
+version: '3'
+services:
+  keyvaultsample:
+    build: .
+    image: keyvaultsample
+    container_name: keyvaultsample
+    ports:
+        - "8080:80"
