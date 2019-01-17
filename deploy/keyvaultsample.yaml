@@ -20,14 +20,14 @@ spec:
     spec:
       containers:
       - name: keyvaultsample
-        image: jcorioland/keyvault-aad-pod-identity:1.6
+        image: emmcmill.azurecr.io/keyvaultsample:1.1
         env:
         - name: AZURE_KEYVAULT_NAME
-          value: keyvaultk8s
+          value: emmcmill-keyvaultk8s-1
         - name: AZURE_KEYVAULT_SECRET_NAME
           value: mySecret
         - name: AZURE_KEYVAULT_SECRET_VERSION
-          value: f540534c4ddc45be9239611f357a7852
+          value: 4c85acd56df5452caff8e25755d57448
 ---
 apiVersion: v1
 kind: Service

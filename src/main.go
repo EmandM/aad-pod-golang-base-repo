@@ -13,7 +13,7 @@ import (
 )
 
 func hello(w http.ResponseWriter, r *http.Request) {
-	io.WriteString(w, "Azure AD Pod Identity + Keyvault Sample")
+	io.WriteString(w, "Emmcmill Keyvault Sample")
 }
 
 func getKeyvaultSecret(w http.ResponseWriter, r *http.Request) {
@@ -26,10 +26,15 @@ func getKeyvaultSecret(w http.ResponseWriter, r *http.Request) {
 
 	if err == nil {
 		keyClient.Authorizer = authorizer
+	} else {
+		io.WriteString(w, fmt.Sprintf("Failed to create authorizer: %v", err))
+		log.Printf("Failed to create authorizer: %v", err)
+		return
 	}
 
 	secret, err := keyClient.GetSecret(context.Background(), fmt.Sprintf("https://%s.vault.azure.net", keyvaultName), keyvaultSecretName, keyvaultSecretVersion)
 	if err != nil {
+		io.WriteString(w, fmt.Sprintf("Failed to retrieve the Keyvault secret: %v", err))
 		log.Printf("failed to retrieve the Keyvault secret: %v", err)
 		return
 	}
@@ -38,8 +43,12 @@ func getKeyvaultSecret(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
+	var PORT string
+	if PORT = os.Getenv("PORT"); PORT == "" {
+		PORT = "8080"
+	}
 	http.HandleFunc("/", hello)
 	http.HandleFunc("/keyvault", getKeyvaultSecret)
-	log.Println("http server listening on :8080")
-	http.ListenAndServe(":8080", nil)
+	log.Println("http server listening on :"+PORT)
+	http.ListenAndServe(":"+PORT, nil)
 }

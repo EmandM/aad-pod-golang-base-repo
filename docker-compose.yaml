@@ -2,7 +2,9 @@ version: '3'
 services:
   keyvaultsample:
     build: .
-    image: keyvaultsample
-    container_name: keyvaultsample
+    image: keyvaultsample-image
+    entrypoint: "/keyvault-sample"
     ports:
-        - "8080:80"
+        - "8080:3030"
+    environment:
+      PORT: 3030

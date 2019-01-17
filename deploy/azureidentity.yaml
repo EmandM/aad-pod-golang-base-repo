@@ -1,0 +1,8 @@
+apiVersion: "aadpodidentity.k8s.io/v1"
+kind: AzureIdentity
+metadata:
+  name: keyvaultsampleidentity
+spec:
+  type: 0
+  ResourceID: /subscriptions/d0610b27-9663-4c05-89f8-5b4be01e86a5/resourceGroups/keyvault-aad-pod-identity-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/keyvaultsampleidentity
+  ClientID: 6261c216-f18a-4b6f-813f-9c7dc50fa6a8

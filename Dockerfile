@@ -1,4 +1,4 @@
-FROM golang:alpine as builder
+FROM golang:1.10.3-alpine3.8 as builder
 
 RUN apk update \
     && apk add ca-certificates \
@@ -6,16 +6,18 @@ RUN apk update \
     && update-ca-certificates \
     && apk add git
 
-ADD ./src /go/src/test/keyvault-sample
 WORKDIR /go/src/test/keyvault-sample
+COPY ./src .
 
-RUN go get -d .
-RUN go build . -t keyvault-sample-image
+RUN go get -d ./...
+RUN go build -o /keyvault-sample main.go
 
-FROM alpine
+FROM alpine:3.8
 RUN apk update \
     && apk add ca-certificates \
     && rm -rf /var/cache/apk/* \
     && update-ca-certificates
 
-CMD ["go", "run", "main.go"]
+EXPOSE 8080
+ENTRYPOINT [ "/keyvault-sample" ]
+COPY --from=builder /keyvault-sample /
