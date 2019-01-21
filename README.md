@@ -1,4 +1,4 @@
-# Azure Policy Add on
+# Azure AAD Pod Identity Keyvault Example
 
 This add on requires the Azure AD Pod Identity infrastructure.
 
