@@ -2,6 +2,12 @@
 
 (All instructions are intended to be run from this folder)
 
+## Initial deployment configuration
+
+For initial set up, follow [this guide](./InitialDeployment.md)
+
+## Build the application
+
 ```
 docker-compose up -d
 ```
@@ -55,18 +61,6 @@ With your image built and tagged, push the docker-image to your ACR instance. Us
 
 ```
 docker push <acrLoginServer>/<docker-image>:<version-number>
-```
-
-## Create Kubernetes AzureIdentity and AzureIdentityBinding
-
-To be able to bind the managed identity you’ve created to the pod that will run the sample application, you need to define two new Kubernetes resources: an AzureIdentity and an AzureIdentityBinding.
-
-```
-kubectl apply -f azureidentity.yaml
-```
-
-```
-kubectl apply -f azureidentitybinding.yaml
 ```
 
 ## Deploy the application
