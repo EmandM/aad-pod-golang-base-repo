@@ -13,7 +13,7 @@ import (
 )
 
 func hello(w http.ResponseWriter, r *http.Request) {
-	io.WriteString(w, "Emmcmill Keyvault Sample")
+	io.WriteString(w, "Azure ManagedIdentity Keyvault Sample")
 }
 
 func getKeyvaultSecret(w http.ResponseWriter, r *http.Request) {
@@ -49,6 +49,6 @@ func main() {
 	}
 	http.HandleFunc("/", hello)
 	http.HandleFunc("/keyvault", getKeyvaultSecret)
-	log.Println("http server listening on :"+PORT)
+	log.Println("http server listening on :" + PORT)
 	http.ListenAndServe(":"+PORT, nil)
 }
