@@ -7,7 +7,7 @@ RUN apk update \
     && apk add git
 
 WORKDIR /go/src/test/keyvault-sample
-COPY ./src .
+COPY ./cmd .
 
 RUN go get -d ./...
 RUN go build -o /keyvault-sample main.go
